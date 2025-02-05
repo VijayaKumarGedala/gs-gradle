@@ -1,7 +1,7 @@
 FROM gradle:8.12.1-jdk17 AS build
 WORKDIR /apps
 COPY . /apps
-RUN ./gradle clean build 
+RUN gradle clean build 
 
 
 FROM eclipse-temurin:17-jdk-alpine AS runtime
