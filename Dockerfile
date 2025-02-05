@@ -1,10 +1,10 @@
 FROM gradle:8.12.1-jdk17 AS build
-WORKDIR /app
-COPY gradlew gradlew.bat /app/
+WORKDIR /apps
+COPY gradlew gradlew.bat /apps/
 COPY gradle /app/gradle/
 COPY build.gradle /app/
 COPY settings.gradle /app/
-COPY src /app/src/
+COPY . /apps
 RUN chmod +x gradlew
 RUN ./gradlew clean build 
 
