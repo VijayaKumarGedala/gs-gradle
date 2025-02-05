@@ -1,0 +1,22 @@
+# Ignore Maven target directories
+target/
+**/target/
+
+# Ignore version control directories
+.git
+.gitignore
+
+# Ignore IDE files
+.idea/
+*.iml
+
+# Ignore log files
+*.log
+
+# Ignore environment variable files
+.env
+*.properties
+
+
+
+
