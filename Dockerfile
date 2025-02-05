@@ -1,9 +1,7 @@
 # Build Stage
 FROM gradle:8.12.1-jdk17-focal AS build
+COPY . /apps
 WORKDIR /apps
-COPY src/build.gradle ./
-COPY src/settings.gradle ./
-COPY src/ src/
 RUN gradle build -x test
 
 # Runtime Stage
