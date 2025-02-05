@@ -1,10 +1,14 @@
-# Build Stage
-FROM gradle:8.12.1-jdk17-focal AS build
-COPY . /apps
-WORKDIR /apps
-RUN gradlew build 
+FROM gradle:8.12.1-jdk17 AS build
+WORKDIR /app
+COPY gradlew gradlew.bat /app/
+COPY gradle /app/gradle/
+COPY build.gradle /app/
+COPY settings.gradle /app/
+COPY src /app/src/
+RUN chmod +x gradlew
+RUN ./gradlew clean build 
 
-# Runtime Stage
+
 FROM eclipse-temurin:17-jdk-alpine AS runtime
 LABEL project="java" \
       author="vijay"
