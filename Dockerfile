@@ -2,7 +2,7 @@
 FROM gradle:8.12.1-jdk17-focal AS build
 COPY . /apps
 WORKDIR /apps
-RUN gradle build 
+RUN gradlew build 
 
 # Runtime Stage
 FROM eclipse-temurin:17-jdk-alpine AS runtime
