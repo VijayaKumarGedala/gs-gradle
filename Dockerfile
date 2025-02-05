@@ -1,9 +1,5 @@
 FROM gradle:8.12.1-jdk17 AS build
 WORKDIR /apps
-COPY gradlew gradlew.bat /apps/
-COPY gradle /app/gradle/
-COPY build.gradle /app/
-COPY settings.gradle /app/
 COPY . /apps
 RUN chmod +x gradlew
 RUN ./gradlew clean build 
