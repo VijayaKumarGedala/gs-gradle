@@ -1,5 +1,6 @@
 FROM gradle:8.12.1-jdk17-focal AS build
-COPY . /apps
+COPY build.gradle settings.gradle gradle/ ./
+COPY src/ src/
 WORKDIR /apps
 RUN gradle build -x test
 
@@ -13,10 +14,12 @@ RUN addgroup -S ${GROUP} && adduser -S ${USERNAME} -G ${GROUP}
 
 WORKDIR /apps
 
-COPY --from=build /apps/build/libs/*.jar /apps/graddle-1.0-snapshot.jar
+COPY --from=build /apps/build/libs/*.jar /apps/gradle-1.0-snapshot.jar
 
-RUN chown ${USERNAME}:${GROUP} /apps/graddle-1.0-snapshot.jar
+RUN chown ${USERNAME}:${GROUP} /apps/gradle-1.0-snapshot.jar
 
 EXPOSE 8080
+
+USER ${USERNAME}
 
 CMD ["java", "-jar", "graddle-1.0-snapshot.jar"]
