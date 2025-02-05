@@ -1,7 +1,6 @@
 FROM gradle:8.12.1-jdk17 AS build
 WORKDIR /apps
 COPY . /apps
-RUN chmod +x gradlew
 RUN ./gradlew clean build 
 
 
