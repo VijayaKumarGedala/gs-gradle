@@ -2,7 +2,7 @@ FROM gradle:8.12.1-jdk17 AS build
 COPY complete /apps
 COPY . /apps
 WORKDIR /apps
-RUN gradle clean build --no-daemon --info
+RUN gradlew clean build --no-daemon --info
 
 FROM eclipse-temurin:17-jdk-alpine AS runtime
 LABEL project="java" \
