@@ -1,8 +1,8 @@
 FROM gradle:8.12.1-jdk17 AS build
-WORKDIR /apps
+COPY complete /apps
 COPY . /apps
-RUN gradle clean build 
-
+WORKDIR /apps
+RUN gradle clean build --no-daemon --info
 
 FROM eclipse-temurin:17-jdk-alpine AS runtime
 LABEL project="java" \
@@ -13,9 +13,10 @@ ARG GROUP=john
 RUN addgroup -S ${GROUP} && adduser -S ${USERNAME} -G ${GROUP}
 
 WORKDIR /apps
-COPY --from=build /apps/build/libs/*.jar /apps/gradle-1.0-snapshot.jar
-RUN chown ${USERNAME}:${GROUP} /apps/gradle-1.0-snapshot.jar
+# Dynamically find the JAR file
+COPY --from=build /apps/build/libs/*.jar /apps/app.jar
+RUN chown ${USERNAME}:${GROUP} /apps/app.jar
 
 USER ${USERNAME}
 EXPOSE 8080
-CMD ["java", "-jar", "gradle-1.0-snapshot.jar"]
+CMD ["java", "-jar", "app.jar"]
