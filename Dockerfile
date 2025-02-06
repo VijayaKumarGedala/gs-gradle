@@ -15,6 +15,7 @@ RUN addgroup -S ${GROUP} && adduser -S ${USERNAME} -G ${GROUP}
 WORKDIR /apps
 COPY --from=build /apps/build/libs/*.jar /apps/app.jar
 RUN chown ${USERNAME}:${GROUP} /apps/app.jar
+RUN chmod +x /apps/app.jar
 
 USER ${USERNAME}
 EXPOSE 8080
