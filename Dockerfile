@@ -13,7 +13,6 @@ ARG GROUP=john
 RUN addgroup -S ${GROUP} && adduser -S ${USERNAME} -G ${GROUP}
 
 WORKDIR /apps
-# Dynamically find the JAR file
 COPY --from=build /apps/build/libs/*.jar /apps/app.jar
 RUN chown ${USERNAME}:${GROUP} /apps/app.jar
 
