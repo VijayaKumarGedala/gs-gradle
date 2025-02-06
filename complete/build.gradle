@@ -4,6 +4,12 @@ apply plugin: 'application'
 
 mainClassName = 'hello.HelloWorld'
 
+jar {
+    manifest {
+        attributes 'Main-Class': 'com.yourpackage.Main'
+    }
+}
+
 // tag::repositories[]
 repositories { 
     mavenCentral() 
